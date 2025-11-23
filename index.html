@@ -63,14 +63,13 @@
             pointer-events: none; 
         }
         .glass-panel {
-            background: rgba(15, 23, 42, 0.7); /* Slightly more opaque for mobile readability */
+            background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        /* Hover effects only on devices that support hover to prevent sticky states on mobile */
         @media (hover: hover) {
             .glass-panel:hover {
                 transform: translateY(-5px);
@@ -78,8 +77,6 @@
                 box-shadow: 0 10px 40px -10px rgba(0, 242, 234, 0.15);
             }
         }
-        
-        /* Typing Cursor */
         .typing-cursor::after {
             content: '|';
             animation: blink 1s step-end infinite;
@@ -87,8 +84,6 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
-
-        /* Scroll Reveal Classes */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -98,8 +93,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Mobile Menu Transition */
         #mobile-menu {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
             max-height: 0;
@@ -121,12 +114,9 @@
     <nav class="fixed w-full z-50 top-0 border-b border-white/5 bg-tech-dark/90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
                 <div class="flex-shrink-0 group cursor-pointer z-50">
                     <span class="font-mono text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-tech-accent to-tech-secondary group-hover:opacity-80 transition-opacity">&lt;DH /&gt;</span>
                 </div>
-                
-                <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#about" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_about">About</a>
@@ -135,10 +125,7 @@
                         <a href="#projects" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_projects">Projects</a>
                     </div>
                 </div>
-
-                <!-- Right Side Controls -->
                 <div class="flex items-center gap-4">
-                    <!-- Language Toggle -->
                     <button id="langToggle" class="relative inline-flex items-center px-3 py-1.5 overflow-hidden text-xs font-medium text-tech-accent border border-tech-accent/30 rounded hover:text-white group hover:bg-tech-accent/10 transition-all duration-300">
                         <span class="absolute left-0 block w-full h-0 transition-all bg-tech-accent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
                         <span class="relative flex items-center gap-2">
@@ -146,8 +133,6 @@
                             <span id="currentLang">EN</span>
                         </span>
                     </button>
-
-                    <!-- Mobile Hamburger Button -->
                     <div class="md:hidden">
                         <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
                             <i class="fa-solid fa-bars text-2xl"></i>
@@ -156,8 +141,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="md:hidden bg-tech-dark/95 border-b border-white/5 backdrop-blur-xl">
             <div class="px-4 pt-2 pb-6 space-y-1">
                 <a href="#about" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5" data-i18n="nav_about">About</a>
@@ -173,7 +156,6 @@
         <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center w-full">
             <!-- Text Content -->
             <div class="lg:col-span-7 text-center lg:text-left mb-12 lg:mb-0 relative z-10">
-                <!-- Status Badge -->
                 <div class="inline-flex items-center px-3 py-1 rounded-full border border-tech-secondary/30 bg-tech-secondary/10 text-tech-secondary text-xs font-mono mb-6 reveal">
                     <span class="relative flex h-2 w-2 mr-2">
                       <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-tech-secondary opacity-75"></span>
@@ -191,21 +173,17 @@
                     Navigating the intersection of <b>Deep Learning</b> and <b>Robotics</b>. Currently pursuing a Ph.D. at the University of Florida, with a focus on bridging mechanical intelligence and advanced computer vision.
                 </p>
                 
-                <!-- Social Links (UPDATED) -->
+                <!-- Social Links -->
                 <div class="flex justify-center lg:justify-start space-x-4 sm:space-x-5 mb-10 reveal" style="transition-delay: 300ms;">
-                    <!-- Github -->
                     <a href="https://github.com/DingyuanHuang" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-tech-accent hover:text-tech-accent hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300">
                         <i class="fa-brands fa-github text-lg sm:text-xl"></i>
                     </a>
-                    <!-- LinkedIn -->
                     <a href="https://www.linkedin.com/in/dingyuan-huang-0322b0326/" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-blue-500 hover:text-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300">
                         <i class="fa-brands fa-linkedin-in text-lg sm:text-xl"></i>
                     </a>
-                    <!-- Google Scholar -->
                     <a href="https://scholar.google.com/citations?user=oKErA34AAAAJ&hl=en" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-white hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300">
                         <i class="fa-solid fa-graduation-cap text-lg sm:text-xl"></i>
                     </a>
-                    <!-- Email -->
                     <a href="mailto:dingyuanhuang@ufl.edu" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-emerald-500 hover:text-emerald-500 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-300">
                         <i class="fa-solid fa-envelope text-lg sm:text-xl"></i>
                     </a>
@@ -216,24 +194,22 @@
                         <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
                         <span data-i18n="btn_work">View Work</span>
                     </a>
-                    <!-- Updated Resume Button -->
-                    <a href="Resume.pdf" target="_blank" class="px-8 py-3 border border-slate-600 rounded text-slate-300 font-medium hover:border-tech-accent hover:text-tech-accent transition-all hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] w-full sm:w-auto text-center flex items-center justify-center" data-i18n="btn_cv">
+                    <!-- RESUME BUTTON - Updated -->
+                    <a href="Resume.pdf" target="_blank" class="relative z-20 px-8 py-3 border border-slate-600 rounded text-slate-300 font-medium hover:border-tech-accent hover:text-tech-accent transition-all hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] w-full sm:w-auto text-center flex items-center justify-center" data-i18n="btn_cv">
                         Download Resume
                     </a>
                 </div>
             </div>
 
-            <!-- Avatar/Visual (Updated Image) -->
+            <!-- Avatar/Visual -->
             <div class="lg:col-span-5 relative group reveal" style="transition-delay: 500ms;">
-                <!-- Decorative Rings -->
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-tech-accent/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-dashed border-tech-secondary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
                 
                 <div class="relative rounded-2xl overflow-hidden aspect-square flex items-center justify-center border border-slate-700/50 bg-slate-900/50 backdrop-blur-sm animate-float mx-auto max-w-sm lg:max-w-full">
-                    <!-- Real Avatar Image -->
-                    <img src="Gemini_Generated_Image_5ngs1h5ngs1h5ngs.jpg" alt="Dingyuan Huang" class="object-cover w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform">
+                    <!-- SIMPLIFIED IMAGE NAME - Ensure you renamed file in GitHub to 'avatar.jpg' -->
+                    <img src="avatar.jpg" alt="Dingyuan Huang" class="object-cover w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform">
                     
-                    <!-- Tech Badge -->
                     <div class="absolute bottom-6 left-6 glass-panel px-4 py-3 rounded-xl flex items-center gap-3 border-l-4 border-tech-accent">
                         <div class="flex flex-col">
                             <span class="text-[10px] font-mono text-tech-accent uppercase tracking-wider">Current Status</span>
@@ -247,9 +223,7 @@
 
     <!-- Research Interests -->
     <section id="research" class="py-12 md:py-20 relative">
-        <!-- Section Background Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-tech-accent/5 to-transparent pointer-events-none"></div>
-        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 md:mb-20 reveal">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="research_title">Core Research</h2>
@@ -261,7 +235,6 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Card 1 -->
                 <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal hover:bg-slate-800/50">
                     <div class="relative h-14 w-14 mb-6 md:mb-8">
                         <div class="absolute inset-0 bg-blue-500/20 rounded-xl rotate-6 group-hover:rotate-12 transition-transform"></div>
@@ -274,8 +247,6 @@
                         Advanced CNN architectures for complex object recognition. Leveraging Keras for medical imaging analysis (Brain Tumor Classification).
                     </p>
                 </div>
-
-                <!-- Card 2 -->
                 <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal" style="transition-delay: 100ms;">
                     <div class="relative h-14 w-14 mb-6 md:mb-8">
                         <div class="absolute inset-0 bg-tech-accent/20 rounded-xl -rotate-3 group-hover:-rotate-6 transition-transform"></div>
@@ -288,8 +259,6 @@
                         UR5 robotic arm integration with tactile sensing. Developing robust control interfaces using ROS & Python for precision manipulation.
                     </p>
                 </div>
-
-                <!-- Card 3 -->
                 <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal" style="transition-delay: 200ms;">
                     <div class="relative h-14 w-14 mb-6 md:mb-8">
                         <div class="absolute inset-0 bg-purple-500/20 rounded-xl rotate-3 group-hover:rotate-6 transition-transform"></div>
@@ -314,7 +283,6 @@
                 <h2 class="text-3xl md:text-4xl font-bold" data-i18n="edu_title">Academic Journey</h2>
             </div>
 
-            <!-- Timeline Container -->
             <div class="space-y-8 relative before:absolute before:left-4 md:before:left-12 before:top-0 before:h-full before:w-px before:bg-slate-800 before:content-['']">
                 
                 <!-- Ph.D. (Current) -->
@@ -384,7 +352,6 @@
                     <p class="text-slate-400 text-sm md:text-base">Highlighting key contributions in robotics and AI.</p>
                 </div>
                 <div class="mt-4 md:mt-0 flex gap-2 flex-wrap">
-                     <!-- Tech Stack Tags -->
                     <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">Python</span>
                     <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">ROS</span>
                     <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">PyTorch</span>
@@ -452,7 +419,7 @@
         </div>
     </section>
 
-    <!-- Footer (UPDATED) -->
+    <!-- Footer -->
     <footer class="border-t border-white/5 bg-tech-dark pt-12 pb-8 md:pt-20 md:pb-10">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8" data-i18n="contact_title">Let's Collaborate</h2>
@@ -469,7 +436,6 @@
 
     <!-- Scripts -->
     <script>
-        // --- 0. Mobile Menu Toggle ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -478,24 +444,21 @@
             mobileMenu.classList.toggle('open');
         });
 
-        // Close mobile menu when a link is clicked
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
             });
         });
 
-        // --- 1. Canvas Animation (Tech Neural Network) ---
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
         
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            initParticles(); // Re-init particles on resize
+            initParticles();
         }
         
         window.addEventListener('resize', resize);
@@ -508,17 +471,14 @@
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 1;
             }
-            
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
-            
             draw() {
-                ctx.fillStyle = 'rgba(34, 211, 238, 0.5)'; // Tech Cyan
+                ctx.fillStyle = 'rgba(34, 211, 238, 0.5)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -527,11 +487,9 @@
         
         function initParticles() {
             particles = [];
-            // Responsive particle count: Fewer on mobile for performance
             const isMobile = window.innerWidth < 768;
             const baseCount = isMobile ? 40 : 100; 
             const particleCount = Math.min(window.innerWidth / 15, baseCount); 
-            
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -539,20 +497,14 @@
         
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            
-            // Draw Connections
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-                
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    // Smaller connection distance on mobile
                     const connectDistance = window.innerWidth < 768 ? 100 : 150;
-
                     if (distance < connectDistance) {
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(34, 211, 238, ${0.1 - distance/(connectDistance*10)})`;
@@ -566,16 +518,13 @@
             requestAnimationFrame(animate);
         }
         
-        // Init
         resize();
         animate();
 
-        // --- 2. Scroll Reveal Observer ---
         const observerOptions = {
             threshold: 0.1,
             rootMargin: "0px 0px -50px 0px"
         };
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -583,10 +532,8 @@
                 }
             });
         }, observerOptions);
-        
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // --- 3. Translations ---
         const translations = {
             en: {
                 nav_about: "About",
