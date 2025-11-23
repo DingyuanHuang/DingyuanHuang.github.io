@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dingyuan Huang | Ph.D. Researcher</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        tech: {
+                            dark: '#0b1120', 
+                            surface: '#1e293b',
+                            accent: '#00f2ea', 
+                            secondary: '#4f46e5', 
+                            text: '#e2e8f0'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #00f2ea, 0 0 10px #00f2ea' },
+                            '100%': { boxShadow: '0 0 20px #00f2ea, 0 0 30px #00f2ea' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities */
+        body {
+            overflow-x: hidden;
+        }
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none; 
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.7); /* Slightly more opaque for mobile readability */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Hover effects only on devices that support hover to prevent sticky states on mobile */
+        @media (hover: hover) {
+            .glass-panel:hover {
+                transform: translateY(-5px);
+                border-color: rgba(0, 242, 234, 0.3);
+                box-shadow: 0 10px 40px -10px rgba(0, 242, 234, 0.15);
+            }
+        }
+        
+        /* Typing Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Reveal Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-tech-dark text-tech-text antialiased selection:bg-tech-accent selection:text-tech-dark relative">
+
+    <!-- Dynamic Background -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 border-b border-white/5 bg-tech-dark/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 group cursor-pointer z-50">
+                    <span class="font-mono text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-tech-accent to-tech-secondary group-hover:opacity-80 transition-opacity">&lt;DH /&gt;</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_about">About</a>
+                        <a href="#research" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_research">Research</a>
+                        <a href="#education" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_education">Education</a>
+                        <a href="#projects" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav_projects">Projects</a>
+                    </div>
+                </div>
+
+                <!-- Right Side Controls -->
+                <div class="flex items-center gap-4">
+                    <!-- Language Toggle -->
+                    <button id="langToggle" class="relative inline-flex items-center px-3 py-1.5 overflow-hidden text-xs font-medium text-tech-accent border border-tech-accent/30 rounded hover:text-white group hover:bg-tech-accent/10 transition-all duration-300">
+                        <span class="absolute left-0 block w-full h-0 transition-all bg-tech-accent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+                        <span class="relative flex items-center gap-2">
+                            <i class="fa-solid fa-globe"></i>
+                            <span id="currentLang">EN</span>
+                        </span>
+                    </button>
+
+                    <!-- Mobile Hamburger Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                            <i class="fa-solid fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden bg-tech-dark/95 border-b border-white/5 backdrop-blur-xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5" data-i18n="nav_about">About</a>
+                <a href="#research" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5" data-i18n="nav_research">Research</a>
+                <a href="#education" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5" data-i18n="nav_education">Education</a>
+                <a href="#projects" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5" data-i18n="nav_projects">Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-28 pb-12 md:pt-32 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center w-full">
+            <!-- Text Content -->
+            <div class="lg:col-span-7 text-center lg:text-left mb-12 lg:mb-0 relative z-10">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center px-3 py-1 rounded-full border border-tech-secondary/30 bg-tech-secondary/10 text-tech-secondary text-xs font-mono mb-6 reveal">
+                    <span class="relative flex h-2 w-2 mr-2">
+                      <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-tech-secondary opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-tech-secondary"></span>
+                    </span>
+                    <span data-i18n="status">Ph.D. Researcher @ UF</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 reveal" style="transition-delay: 100ms;">
+                    <span data-i18n="greeting">Hi, I'm</span> <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tech-accent via-blue-400 to-tech-secondary typing-cursor" id="typewriter-name">Dingyuan Huang</span>
+                </h1>
+                
+                <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed reveal" style="transition-delay: 200ms;" data-i18n="bio">
+                    Navigating the intersection of <b>Deep Learning</b> and <b>Robotics</b>. Currently pursuing a Ph.D. at the University of Florida, with a focus on bridging mechanical intelligence and advanced computer vision.
+                </p>
+                
+                <!-- Social Links (UPDATED) -->
+                <div class="flex justify-center lg:justify-start space-x-4 sm:space-x-5 mb-10 reveal" style="transition-delay: 300ms;">
+                    <!-- Github -->
+                    <a href="https://github.com/DingyuanHuang" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-tech-accent hover:text-tech-accent hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300">
+                        <i class="fa-brands fa-github text-lg sm:text-xl"></i>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/dingyuan-huang-0322b0326/" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-blue-500 hover:text-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300">
+                        <i class="fa-brands fa-linkedin-in text-lg sm:text-xl"></i>
+                    </a>
+                    <!-- Google Scholar -->
+                    <a href="https://scholar.google.com/citations?user=oKErA34AAAAJ&hl=en" target="_blank" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-white hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300">
+                        <i class="fa-solid fa-graduation-cap text-lg sm:text-xl"></i>
+                    </a>
+                    <!-- Email -->
+                    <a href="mailto:dingyuanhuang@ufl.edu" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-slate-700 bg-slate-800/50 flex items-center justify-center hover:border-emerald-500 hover:text-emerald-500 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-300">
+                        <i class="fa-solid fa-envelope text-lg sm:text-xl"></i>
+                    </a>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal" style="transition-delay: 400ms;">
+                    <a href="#projects" class="group relative px-8 py-3 bg-tech-accent text-tech-dark font-bold rounded overflow-hidden transition-all hover:scale-105 text-center">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                        <span data-i18n="btn_work">View Work</span>
+                    </a>
+                    <button onclick="alert('New resume coming soon!')" class="px-8 py-3 border border-slate-600 rounded text-slate-300 font-medium hover:border-tech-accent hover:text-tech-accent transition-all hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] w-full sm:w-auto" data-i18n="btn_cv">
+                        Download Resume
+                    </button>
+                </div>
+            </div>
+
+            <!-- Avatar/Visual -->
+            <div class="lg:col-span-5 relative group reveal" style="transition-delay: 500ms;">
+                <!-- Decorative Rings -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-tech-accent/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-dashed border-tech-secondary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <div class="relative rounded-2xl overflow-hidden aspect-square flex items-center justify-center border border-slate-700/50 bg-slate-900/50 backdrop-blur-sm animate-float mx-auto max-w-sm lg:max-w-full">
+                    <!-- Placeholder Image -->
+                    <img src="https://placehold.co/600x600/0f172a/22d3ee?text=DH+Avatar" alt="Dingyuan Huang" class="object-cover w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform">
+                    
+                    <!-- Tech Badge -->
+                    <div class="absolute bottom-6 left-6 glass-panel px-4 py-3 rounded-xl flex items-center gap-3 border-l-4 border-tech-accent">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-mono text-tech-accent uppercase tracking-wider">Current Status</span>
+                            <span class="text-sm font-bold text-white">Ph.D. in Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Interests -->
+    <section id="research" class="py-12 md:py-20 relative">
+        <!-- Section Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-tech-accent/5 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="research_title">Core Research</h2>
+                <div class="flex justify-center gap-2">
+                    <div class="h-1 w-2 bg-tech-accent rounded-full"></div>
+                    <div class="h-1 w-20 bg-gradient-to-r from-tech-accent to-tech-secondary rounded-full"></div>
+                    <div class="h-1 w-2 bg-tech-secondary rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal hover:bg-slate-800/50">
+                    <div class="relative h-14 w-14 mb-6 md:mb-8">
+                        <div class="absolute inset-0 bg-blue-500/20 rounded-xl rotate-6 group-hover:rotate-12 transition-transform"></div>
+                        <div class="absolute inset-0 bg-tech-dark border border-blue-500/30 rounded-xl flex items-center justify-center text-blue-400">
+                            <i class="fa-solid fa-brain text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white" data-i18n="area_dl">Deep Learning</h3>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed" data-i18n="desc_dl">
+                        Advanced CNN architectures for complex object recognition. Leveraging Keras for medical imaging analysis (Brain Tumor Classification).
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-14 w-14 mb-6 md:mb-8">
+                        <div class="absolute inset-0 bg-tech-accent/20 rounded-xl -rotate-3 group-hover:-rotate-6 transition-transform"></div>
+                        <div class="absolute inset-0 bg-tech-dark border border-tech-accent/30 rounded-xl flex items-center justify-center text-tech-accent">
+                            <i class="fa-solid fa-robot text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white" data-i18n="area_robotics">Robotics</h3>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed" data-i18n="desc_robotics">
+                        UR5 robotic arm integration with tactile sensing. Developing robust control interfaces using ROS & Python for precision manipulation.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl group reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-14 w-14 mb-6 md:mb-8">
+                        <div class="absolute inset-0 bg-purple-500/20 rounded-xl rotate-3 group-hover:rotate-6 transition-transform"></div>
+                        <div class="absolute inset-0 bg-tech-dark border border-purple-500/30 rounded-xl flex items-center justify-center text-purple-400">
+                            <i class="fa-solid fa-network-wired text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white" data-i18n="area_vla">VLA Models</h3>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed" data-i18n="desc_vla">
+                        Pioneering research in Vision-Language-Action models, enabling robots to interpret natural language commands into physical actions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-12 md:py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-12 md:mb-16 reveal">
+                <div class="h-8 md:h-12 w-1 bg-tech-accent mr-4 md:mr-6 rounded-full"></div>
+                <h2 class="text-3xl md:text-4xl font-bold" data-i18n="edu_title">Academic Journey</h2>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="space-y-8 relative before:absolute before:left-4 md:before:left-12 before:top-0 before:h-full before:w-px before:bg-slate-800 before:content-['']">
+                
+                <!-- Ph.D. (Current) -->
+                <div class="relative pl-12 md:pl-24 reveal">
+                    <div class="absolute left-2 md:left-10 top-6 w-4 h-4 bg-tech-dark border-4 border-tech-accent rounded-full z-10 shadow-[0_0_10px_#22d3ee]"></div>
+                    <div class="glass-panel p-6 md:p-8 rounded-2xl border-l-4 border-l-tech-accent">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-white rounded-lg p-1 flex items-center justify-center">
+                                    <img src="https://placehold.co/100x100/orange/white?text=UF" class="object-contain" alt="UF">
+                                </div>
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-bold text-white" data-i18n="school_uf">University of Florida</h3>
+                                    <p class="text-tech-accent font-mono text-xs md:text-sm">01/2026 - Present</p>
+                                </div>
+                            </div>
+                            <span class="mt-3 md:mt-0 px-3 py-1 rounded-full bg-tech-accent/10 text-tech-accent text-[10px] md:text-xs font-bold border border-tech-accent/20 self-start md:self-auto">IN PROGRESS</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-angle-right text-slate-500 mt-1.5"></i>
+                                <p class="text-base md:text-lg text-slate-200 font-medium" data-i18n="degree_phd">Ph.D. in Civil and Coastal Engineering</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-angle-right text-slate-500 mt-1.5"></i>
+                                <p class="text-sm md:text-base text-slate-300" data-i18n="degree_mscs">MS in Computer Science (Concurrent)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MS ECE (Completed) -->
+                <div class="relative pl-12 md:pl-24 reveal" style="transition-delay: 100ms;">
+                    <div class="absolute left-2.5 md:left-10.5 top-6 w-3 h-3 bg-slate-600 rounded-full z-10"></div>
+                    <div class="glass-panel p-6 rounded-2xl opacity-80 hover:opacity-100 transition-opacity">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+                            <h3 class="text-lg md:text-xl font-bold text-white">University of Florida</h3>
+                            <span class="text-slate-500 font-mono text-xs md:text-sm">08/2024 - 12/2025</span>
+                        </div>
+                        <p class="text-slate-300 mb-1 text-sm md:text-base" data-i18n="degree_msece">MS in Electrical and Computer Engineering</p>
+                        <p class="text-slate-500 text-[10px] md:text-xs uppercase tracking-wider">Completed</p>
+                    </div>
+                </div>
+
+                <!-- Bachelor (Completed) -->
+                <div class="relative pl-12 md:pl-24 reveal" style="transition-delay: 200ms;">
+                    <div class="absolute left-2.5 md:left-10.5 top-6 w-3 h-3 bg-slate-600 rounded-full z-10"></div>
+                    <div class="glass-panel p-6 rounded-2xl opacity-80 hover:opacity-100 transition-opacity">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+                            <h3 class="text-lg md:text-xl font-bold text-white" data-i18n="school_csu">Central South University</h3>
+                            <span class="text-slate-500 font-mono text-xs md:text-sm">09/2019 - 06/2023</span>
+                        </div>
+                        <p class="text-slate-300 mb-1 text-sm md:text-base" data-i18n="degree_csu">BE in Mechanical Manufacture and Automation</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="projects" class="py-12 md:py-20 bg-tech-surface/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2" data-i18n="exp_title">Research & Experience</h2>
+                    <p class="text-slate-400 text-sm md:text-base">Highlighting key contributions in robotics and AI.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2 flex-wrap">
+                     <!-- Tech Stack Tags -->
+                    <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">Python</span>
+                    <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">ROS</span>
+                    <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">PyTorch</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <!-- Exp 1 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl md:col-span-2 reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-8xl md:text-9xl text-white pointer-events-none">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-bold text-white" data-i18n="role_dreamx">Research Assistant @ DreamX Lab</h3>
+                                <p class="text-tech-accent text-xs md:text-sm font-mono mt-1">UF Herbert Wertheim College | 04/2025 - Present</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 mb-6 text-sm md:text-base">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tech-accent mt-1.5 text-xs"></i>
+                                <span data-i18n="desc_dreamx_1">Built a mobile integrated robotic workstation based on a UR5 robotic arm, enabling modular automation.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tech-accent mt-1.5 text-xs"></i>
+                                <span data-i18n="desc_dreamx_2">Developed Python/ROS control interfaces for motion planning, object grasping, and teleoperation.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tech-accent mt-1.5 text-xs"></i>
+                                <span data-i18n="desc_dreamx_3">Integrated Robotiq 2F-85 gripper and tactile/force sensors for real-time feedback and dataset collection.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exp 2 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl reveal">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-1" data-i18n="role_oxford">Team Leader @ Object Recognition</h3>
+                    <p class="text-slate-500 text-xs md:text-sm font-mono mb-4">Univ. of Oxford (Remote) | 02/2023 - 05/2023</p>
+                    <p class="text-slate-400 text-sm mb-4 leading-relaxed" data-i18n="desc_oxford_sum">
+                        Led a team in garbage recognition tasks. Personally trained a CNN with Keras for brain tumor classification (Accuracy improved). Authored paper adopted by CONF-CDS 2023.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 text-[10px] rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Deep Learning</span>
+                        <span class="px-2 py-1 text-[10px] rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Paper Published</span>
+                    </div>
+                </div>
+
+                <!-- Exp 3 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl reveal">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-1" data-i18n="role_intern">Intern @ Guoxuan New Energy</h3>
+                    <p class="text-slate-500 text-xs md:text-sm font-mono mb-4">Hefei, China | 03/2024 - 05/2024</p>
+                    <p class="text-slate-400 text-sm mb-4 leading-relaxed" data-i18n="desc_intern">
+                        Optimized BMS control board circuits using AutoCAD. Modeled battery performance under various loads using MATLAB to optimize control strategies.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 text-[10px] rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">BMS</span>
+                        <span class="px-2 py-1 text-[10px] rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">MATLAB</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (UPDATED) -->
+    <footer class="border-t border-white/5 bg-tech-dark pt-12 pb-8 md:pt-20 md:pb-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8" data-i18n="contact_title">Let's Collaborate</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-8 mb-8 md:mb-12">
+                <a href="https://dreamxlab.github.io/projects/" target="_blank" class="text-slate-400 hover:text-tech-accent transition-colors text-base md:text-lg"><i class="fa-solid fa-flask mr-2"></i>Lab Page</a>
+                <a href="https://scholar.google.com/citations?user=oKErA34AAAAJ&hl=en" target="_blank" class="text-slate-400 hover:text-tech-accent transition-colors text-base md:text-lg"><i class="fa-brands fa-google mr-2"></i>Scholar</a>
+                <a href="mailto:dingyuanhuang@ufl.edu" class="text-slate-400 hover:text-tech-accent transition-colors text-base md:text-lg"><i class="fa-solid fa-envelope mr-2"></i>Email</a>
+            </div>
+            <p class="text-slate-700 text-xs md:text-sm">
+                &copy; 2026 Dingyuan Huang. Designed for the Future.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 0. Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // --- 1. Canvas Animation (Tech Neural Network) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles(); // Re-init particles on resize
+        }
+        
+        window.addEventListener('resize', resize);
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = 'rgba(34, 211, 238, 0.5)'; // Tech Cyan
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            // Responsive particle count: Fewer on mobile for performance
+            const isMobile = window.innerWidth < 768;
+            const baseCount = isMobile ? 40 : 100; 
+            const particleCount = Math.min(window.innerWidth / 15, baseCount); 
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw Connections
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Smaller connection distance on mobile
+                    const connectDistance = window.innerWidth < 768 ? 100 : 150;
+
+                    if (distance < connectDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(34, 211, 238, ${0.1 - distance/(connectDistance*10)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        
+        // Init
+        resize();
+        animate();
+
+        // --- 2. Scroll Reveal Observer ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 3. Translations ---
+        const translations = {
+            en: {
+                nav_about: "About",
+                nav_research: "Research",
+                nav_education: "Academic Journey",
+                nav_projects: "Experience",
+                status: "Ph.D. Researcher @ UF",
+                greeting: "Hi, I'm",
+                bio: "Navigating the intersection of <b>Deep Learning</b> and <b>Robotics</b>. Currently pursuing a Ph.D. at the University of Florida, with a focus on bridging mechanical intelligence and advanced computer vision.",
+                btn_work: "View Work",
+                btn_cv: "Download Resume",
+                research_title: "Core Research",
+                area_dl: "Deep Learning",
+                desc_dl: "Advanced CNN architectures for complex object recognition. Leveraging Keras for medical imaging analysis (Brain Tumor Classification).",
+                area_robotics: "Robotics",
+                desc_robotics: "UR5 robotic arm integration with tactile sensing. Developing robust control interfaces using ROS & Python for precision manipulation.",
+                area_vla: "VLA Models",
+                desc_vla: "Pioneering research in Vision-Language-Action models, enabling robots to interpret natural language commands into physical actions.",
+                edu_title: "Academic Journey",
+                school_uf: "University of Florida",
+                degree_phd: "Ph.D. in Civil and Coastal Engineering",
+                degree_mscs: "MS in Computer Science (Concurrent)",
+                degree_msece: "MS in Electrical and Computer Engineering",
+                school_csu: "Central South University",
+                degree_csu: "BE in Mechanical Manufacture and Automation",
+                exp_title: "Research & Experience",
+                role_dreamx: "Research Assistant @ DreamX Lab",
+                desc_dreamx_1: "Built a mobile integrated robotic workstation based on a UR5 robotic arm, enabling modular automation.",
+                desc_dreamx_2: "Developed Python/ROS control interfaces for motion planning, object grasping, and teleoperation.",
+                desc_dreamx_3: "Integrated Robotiq 2F-85 gripper and tactile/force sensors for real-time feedback and dataset collection.",
+                role_oxford: "Team Leader @ Object Recognition",
+                desc_oxford_sum: "Led a team in garbage recognition tasks. Personally trained a CNN with Keras for brain tumor classification (Accuracy improved). Authored paper adopted by CONF-CDS 2023.",
+                role_intern: "Intern @ Guoxuan New Energy",
+                desc_intern: "Optimized BMS control board circuits using AutoCAD. Modeled battery performance under various loads using MATLAB to optimize control strategies.",
+                contact_title: "Let's Collaborate"
+            },
+            zh: {
+                nav_about: "关于我",
+                nav_research: "核心研究",
+                nav_education: "学术生涯",
+                nav_projects: "项目经历",
+                status: "博士研究生 @ 佛罗里达大学",
+                greeting: "你好，我是",
+                bio: "我致力于探索 **深度学习** 与 **机器人技术** 的交叉领域。目前在佛罗里达大学攻读博士学位，专注于连接机械智能与先进计算机视觉。",
+                btn_work: "查看工作",
+                btn_cv: "下载简历",
+                research_title: "核心研究",
+                area_dl: "深度学习",
+                desc_dl: "研究用于复杂物体识别的先进 CNN 架构。利用 Keras 进行医学图像分析（脑肿瘤分类研究）。",
+                area_robotics: "机器人技术",
+                desc_robotics: "UR5 机械臂与触觉传感器的集成。使用 ROS 和 Python 开发鲁棒的控制接口以实现精密操作。",
+                area_vla: "VLA 模型",
+                desc_vla: "先锋探索视觉-语言-动作 (VLA) 模型，使机器人能够将自然语言指令转化为物理动作。",
+                edu_title: "学术生涯",
+                school_uf: "佛罗里达大学 (UF)",
+                degree_phd: "土木与海岸工程 博士 (Ph.D.)",
+                degree_mscs: "计算机科学 硕士 (MS CS - 在读)",
+                degree_msece: "电子与计算机工程 硕士 (MS ECE)",
+                school_csu: "中南大学 (CSU)",
+                degree_csu: "机械设计制造及其自动化 学士",
+                exp_title: "研究与经历",
+                role_dreamx: "研究助理 @ DreamX Lab",
+                desc_dreamx_1: "基于 UR5 机械臂构建移动集成机器人工作站，实现模块化自动化。",
+                desc_dreamx_2: "开发基于 Python/ROS 的运动规划、物体抓取和遥操作控制接口。",
+                desc_dreamx_3: "集成 Robotiq 2F-85 夹爪和触觉/力传感器，用于实时反馈和数据集收集。",
+                role_oxford: "团队负责人 @ 物体识别项目",
+                desc_oxford_sum: "带领团队完成垃圾识别任务。基于 Keras 独立训练 CNN 模型用于脑肿瘤分类（提升了准确率）。撰写论文被 CONF-CDS 2023 录用。",
+                role_intern: "实习生 @ 国轩高科",
+                desc_intern: "使用 AutoCAD 优化 BMS 控制板电路。利用 MATLAB 模拟不同负载下的电池性能，为控制策略优化提供参考。",
+                contact_title: "寻求合作"
+            }
+        };
+
+        let currentLang = 'en';
+        const langToggleBtn = document.getElementById('langToggle');
+        const langDisplay = document.getElementById('currentLang');
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+            langDisplay.textContent = currentLang === 'en' ? 'EN' : '中';
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateContent();
+        });
+    </script>
+</body>
+</html>
