@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Dingyuan Huang — DH</title>
+  <defs>
+    <linearGradient id="monogram" x1="9" y1="16" x2="57" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00f2ea"/>
+      <stop offset="1" stop-color="#a5b4fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0b1120"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#243950" stroke-width="1.5"/>
+  <g fill="url(#monogram)">
+    <path fill-rule="evenodd" d="M9 16h8c10 0 15 6 15 16s-5 16-15 16H9V16zm7 7v18h1c5.5 0 8-3.5 8-9s-2.5-9-8-9h-1z"/>
+    <path d="M36 16h7v12h7V16h7v32h-7V35h-7v13h-7V16z"/>
+  </g>
+</svg>

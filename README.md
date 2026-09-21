@@ -9,6 +9,7 @@ Personal research website: https://dingyuanhuang.github.io/
 - `Resume.pdf`: downloadable resume exported from the supplied Google Doc.
 - `assets/`: local styles, scripts, images, fonts, and third-party licenses.
 - `avatar.jpg`: portrait fallback and sharing image.
+- `favicon.ico`, `favicon-96x96.png`, `apple-touch-icon.png`, and `assets/favicon.svg`: DH site icons and their vector source.
 - `sitemap.xml` and the Google verification HTML file: search-engine metadata.
 
 The site is static and publishes from the `main` branch through GitHub Pages. Keep all website files together when updating it. `.nojekyll` serves the checked-in files without Jekyll processing. No runtime package installation or external font/script service is required.
