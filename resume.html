@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dingyuan Huang's resume: robotics systems, computer vision, physical AI, dental surgical assistance, humanoid robot learning, and engineering experience.">
+    <meta name="theme-color" content="#0b1120">
+    <title>Dingyuan Huang | Resume</title>
+    <link rel="canonical" href="https://dingyuanhuang.github.io/resume.html">
+    <link rel="stylesheet" href="assets/fonts.css">
+    <style>
+        :root { color-scheme: dark; --background: #0b1120; --surface: #0f172a; --text: #e2e8f0; --muted: #b8c6d9; --accent: #00f2ea; --secondary: #a5b4fc; }
+        * { box-sizing: border-box; }
+        html { font-size: 100%; }
+        body { margin: 0; background: var(--background); color: var(--text); font: 1rem/1.65 Inter, "Segoe UI", Arial, sans-serif; overflow-wrap: anywhere; }
+        a { color: var(--accent); text-decoration: underline; text-underline-offset: .2em; }
+        a:hover { color: #fff; }
+        :focus { outline: 3px solid var(--accent); outline-offset: 4px; }
+        .skip-link { position: absolute; top: -100rem; left: 1rem; padding: .7rem 1rem; z-index: 10; background: #fff; color: #0b1120; }
+        .skip-link:focus { top: 1rem; }
+        .page { width: min(100% - 2rem, 66rem); margin: 0 auto; }
+        nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 1rem 0; border-bottom: 1px solid #526179; }
+        nav a { display: inline-flex; align-items: center; min-height: 44px; padding: .4rem .2rem; }
+        main { padding: 2.5rem 0; }
+        header { border-left: 4px solid var(--accent); padding-left: 1.4rem; margin-bottom: 2.3rem; }
+        h1, h2, h3 { line-height: 1.25; color: #fff; }
+        h1 { margin: 0 0 .5rem; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.04em; }
+        h2 { margin: 0 0 1rem; font-size: 1.55rem; }
+        h3 { margin: 0 0 .35rem; font-size: 1.15rem; }
+        p { margin: .4rem 0 .8rem; }
+        .subtitle { color: var(--secondary); font-weight: 600; }
+        address { font-style: normal; }
+        address ul { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1.4rem; list-style: none; padding: 0; margin: .4rem 0 0; }
+        address li { min-width: 0; max-width: 100%; }
+        address a { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; }
+        section { margin: 0 0 2rem; }
+        .panel { background: var(--surface); border: 1px solid #526179; border-radius: 1rem; padding: 1.5rem; }
+        article + article { margin-top: 1.3rem; padding-top: 1.3rem; border-top: 1px solid #526179; }
+        .meta { color: var(--muted); font-size: .95rem; }
+        .role { font-weight: 600; color: var(--secondary); }
+        ul { padding-left: 1.4rem; }
+        article li + li { margin-top: .4rem; }
+        article ul { margin: .65rem 0 0; }
+        dl { margin: 0; }
+        dt { font-weight: 700; margin-top: .85rem; }
+        dt:first-child { margin-top: 0; }
+        dd { margin: .2rem 0 0; }
+        footer { color: var(--muted); border-top: 1px solid #526179; padding: 1rem 0 2rem; }
+        @media (max-width: 35rem) { .panel { padding: 1.15rem; } header { padding-left: 1rem; } address ul { display: block; } }
+        @media (forced-colors: active) { :focus { outline-color: Highlight; } .panel, header, footer, nav { border-color: CanvasText; } }
+        @page { size: Letter; margin: .55in; }
+        @media print {
+            :root { color-scheme: light; }
+            body { background: #fff; color: #111; font: 10.5pt/1.38 Arial, sans-serif; }
+            .page { width: 100%; }
+            .skip-link, nav, footer { display: none; }
+            main { padding: 0; }
+            header { margin-bottom: 14pt; padding-left: 10pt; border-left-color: #12646b; }
+            h1 { color: #111; font-size: 25pt; margin-bottom: 4pt; }
+            h2 { color: #111; font-size: 14pt; margin-bottom: 8pt; break-after: avoid; }
+            h3 { color: #111; font-size: 11pt; break-after: avoid; }
+            .subtitle, .role { color: #253b6e; }
+            .meta { color: #333; font-size: 10pt; }
+            a { color: #06455e; }
+            address a { min-height: 0; }
+            address ul { display: flex; }
+            .panel { background: transparent; border: 0; border-radius: 0; padding: 0; }
+            section { margin-bottom: 15pt; }
+            article { break-inside: avoid; }
+            article + article { margin-top: 10pt; padding-top: 9pt; border-top-color: #9aa2af; }
+            p { margin: 3pt 0 6pt; }
+            article ul { margin-top: 5pt; }
+            article li + li { margin-top: 3pt; }
+            dt { margin-top: 6pt; }
+            dl { break-inside: avoid; }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/page-transitions.css">
+    <script defer src="assets/page-transitions.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#resume">Skip to resume</a>
+    <div class="page">
+        <nav aria-label="Resume navigation">
+            <a href="index.html">Back to Dingyuan Huang's homepage</a>
+            <a href="Resume.pdf" download="Dingyuan-Huang-Resume.pdf">Download Resume (PDF)</a>
+        </nav>
+        <main id="resume" tabindex="-1">
+            <header>
+                <h1>Dingyuan Huang</h1>
+                <p class="subtitle">Ph.D. Researcher · Robotics Systems · Computer Vision · Physical AI</p>
+                <address>
+                    <p>Gainesville, FL, USA</p>
+                    <ul>
+                        <li><a href="mailto:huangdingyuan122@gmail.com">huangdingyuan122@gmail.com</a></li>
+                        <li><a href="mailto:dingyuanhuang@ufl.edu">dingyuanhuang@ufl.edu</a></li>
+                        <li><a href="tel:+17252857273">+1 725 285 7273</a></li>
+                    </ul>
+                </address>
+            </header>
+
+            <section aria-labelledby="profile-heading">
+                <h2 id="profile-heading">Research Profile</h2>
+                <p>Doctoral researcher at the University of Florida focused on visual perception, robot manipulation, and human–robot interaction. Develops integrated research systems in which perception, control, and sensor feedback support physical manipulation, with current work on vision-guided assistance for dental surgery and humanoid robot learning.</p>
+                <p>Combines mechanical and electrical engineering with software development to build robotic workstations, implement manipulation workflows, and investigate their operation on physical hardware. Earlier experience in visual recognition, battery-system modeling, and manufacturing automation provides a foundation for research that connects computational methods with working engineering systems.</p>
+            </section>
+
+            <section class="panel" aria-labelledby="education-heading">
+                <h2 id="education-heading">Education</h2>
+                <article>
+                    <h3>University of Florida</h3>
+                    <p>Ph.D. in Civil and Coastal Engineering</p>
+                    <p class="meta"><time datetime="2026-01">January 2026</time> – Present · In progress</p>
+                </article>
+                <article>
+                    <h3>University of Florida</h3>
+                    <p>M.S. in Electrical and Computer Engineering</p>
+                    <p class="meta"><time datetime="2024-08">August 2024</time> – <time datetime="2025-12">December 2025</time></p>
+                </article>
+                <article>
+                    <h3>Central South University</h3>
+                    <p>B.E. in Mechanical Manufacture and Automation</p>
+                    <p class="meta"><time datetime="2019-09">September 2019</time> – <time datetime="2023-06">June 2023</time></p>
+                </article>
+            </section>
+
+            <section class="panel" aria-labelledby="experience-heading">
+                <h2 id="experience-heading">Research &amp; Engineering Experience</h2>
+                <article>
+                    <h3>Robot Manipulation &amp; Systems Integration</h3>
+                    <p class="role">Research Assistant</p>
+                    <p class="meta">DreamX Lab · University of Florida · Herbert Wertheim College of Engineering<br>Gainesville, FL, USA · <time datetime="2025-04">April 2025</time> – Present</p>
+                    <ul>
+                        <li>Develop integrated robotic research systems that connect visual perception and sensor feedback to manipulation, and validate their operation on physical hardware.</li>
+                        <li>Built a modular, relocatable robotic workstation for precision manipulation and smart manufacturing experiments.</li>
+                        <li>Develop Python and ROS control interfaces for motion planning, grasping, and teleoperation to support manipulation experiments.</li>
+                        <li>Integrated tactile and force sensing with robotic gripping to capture interaction feedback and collect manipulation data.</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Vision-Guided Robotics for Dental Surgery</h3>
+                    <p class="role">Robotics Researcher</p>
+                    <p class="meta">University of Florida · <time datetime="2025">2025</time> – Present</p>
+                    <ul>
+                        <li>Developed a vision-guided robotic system for dental surgical assistance.</li>
+                        <li>Supports instrument preparation and delivery for orthodontic procedures, voice interaction, and AI agent assistance.</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Battery Systems Design &amp; Modeling</h3>
+                    <p class="role">Engineering Intern</p>
+                    <p class="meta">Anhui Guoxuan New Energy Automobile Technology Co., Ltd.<br>Hefei, Anhui, China · <time datetime="2024-03">March 2024</time> – <time datetime="2024-05">May 2024</time></p>
+                    <ul>
+                        <li>Supported battery management system (BMS) development through control-board circuit design, component selection, and design review, working with senior engineers to refine circuits and technical drawings.</li>
+                        <li>Collected battery operating data and built MATLAB performance models to examine behavior under varying loads, providing an analytical basis for evaluating BMS control strategies.</li>
+                        <li>Collaborated with mechanical engineers on structural and thermal solutions, connecting control-board requirements with the wider battery-system design.</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3><a href="https://ace.ewapub.com/article/view/4684">Deep Learning for Visual Recognition</a></h3>
+                    <p class="role">Project Team Leader</p>
+                    <p class="meta">Guided research project supervised by Prof. Alex Rogers, University of Oxford<br><time datetime="2023-02">February 2023</time> – <time datetime="2023-05">May 2023</time></p>
+                    <ul>
+                        <li>Led a collaborative waste-recognition study, coordinating dataset annotation, model training, and iterative refinement to develop an object-classification workflow.</li>
+                        <li>Conducted an independent brain-tumor image-classification study, training and refining a convolutional neural network to improve recognition accuracy.</li>
+                        <li>Authored a paper documenting the brain-tumor classification model, published in the proceedings of the 5th International Conference on Computing and Data Science (CONF-CDS 2023).</li>
+                    </ul>
+                    <p><a href="https://ace.ewapub.com/article/view/4684">Edge impulse-based convolutional neural network for brain tumor classification</a></p>
+                    <p class="meta">CONF-CDS 2023 · Applied and Computational Engineering</p>
+                </article>
+                <article>
+                    <h3>Intelligent Manufacturing &amp; Industrial Automation</h3>
+                    <p class="role">Research Course Team Member</p>
+                    <p class="meta">RWTH Aachen University · Supervised by Prof. Alexander Mertens<br><time datetime="2022-07">July 2022</time> – <time datetime="2022-08">August 2022</time></p>
+                    <ul>
+                        <li>Collaborated on a smart-factory layout and mobile-robot control interface, relating the factory's material flow to its automation requirements.</li>
+                        <li>Designed a manufacturing workflow that connected material conveying, CNC milling, and unloading, then implemented it on a robotic training platform.</li>
+                        <li>Programmed the PLC control logic and executed the milling sequence, carrying the workflow from process design into physical operation.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section class="panel" aria-labelledby="selected-research-heading">
+                <h2 id="selected-research-heading">Selected Research</h2>
+                <article>
+                    <h3>Humanoid Robot Learning</h3>
+                    <p class="role">Co-author · JIC 2026 &amp; HOIST 2026</p>
+                    <p>Co-authored research on humanoid robot learning spanning vision–language–action models, imitation learning, and reinforcement learning.</p>
+                    <ul>
+                        <li>
+                            <a href="https://www.sciopen.com/article/10.26599/JIC.2026.9180110">Learning humanoid locomotion skills for material handling and transportation in construction sites</a>
+                            <p class="meta">Journal of Intelligent Construction · 2026</p>
+                        </li>
+                        <li>
+                            <a href="https://arxiv.org/abs/2606.00252">HOIST: Humanoid Optimization with Imitation and Sample-efficient Tuning for Manipulating Suspended Loads</a>
+                            <p class="meta">arXiv preprint · 2026</p>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <section class="panel" aria-labelledby="skills-heading">
+                <h2 id="skills-heading">Technical Skills &amp; Platforms</h2>
+                <dl>
+                    <dt>Programming &amp; robotics software</dt>
+                    <dd>Python, C/C++, ROS, ROS 2, Linux, PLC programming</dd>
+                    <dt>Computer vision &amp; robot learning</dt>
+                    <dd>OpenCV, YOLO, PyTorch, Keras, RGB-D and 3D vision, vision–language–action models, reinforcement learning, imitation learning</dd>
+                    <dt>Robot manipulation &amp; control</dt>
+                    <dd>Grasping, motion planning, visual servoing, teleoperation, tactile feedback, force/torque sensing</dd>
+                    <dt>Robot, sensor &amp; computing platforms</dt>
+                    <dd>UR5, WidowX AI, Piper, humanoid robots, Intel RealSense D405/D455, Robotiq grippers including 2F-85, NVIDIA Jetson AGX Orin</dd>
+                    <dt>Analysis &amp; instrumentation</dt>
+                    <dd>MATLAB, LabVIEW, Proteus</dd>
+                    <dt>Design &amp; manufacturing</dt>
+                    <dd>AutoCAD, SOLIDWORKS, Altium Designer, Revit, Blender, Mastercam, Swansoft CNC Simulator</dd>
+                </dl>
+            </section>
+
+            <section class="panel" aria-labelledby="languages-heading">
+                <h2 id="languages-heading">Languages</h2>
+                <dl>
+                    <dt>Chinese</dt>
+                    <dd>Native proficiency</dd>
+                    <dt>English</dt>
+                    <dd>Professional proficiency</dd>
+                </dl>
+            </section>
+        </main>
+        <footer>
+            <p>Dingyuan Huang · <a href="index.html">Research portfolio and contact links</a></p>
+        </footer>
+    </div>
+</body>
+</html>

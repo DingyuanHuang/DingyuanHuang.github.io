@@ -1,0 +1,50 @@
+/* Finite enhancements: content is fully visible unless JavaScript starts a transition. */
+.page-entering main,
+.page-entering footer {
+    animation: site-page-enter-fade 300ms ease-out both;
+}
+.page-exiting main,
+.page-exiting footer {
+    animation: site-page-exit-fade 180ms ease-in both;
+}
+/* The resume has no moving starfield or nested scroll reveals. */
+.page-entering .page > main,
+.page-entering .page > footer {
+    animation-name: site-page-enter;
+}
+.page-exiting .page > main,
+.page-exiting .page > footer {
+    animation-name: site-page-exit;
+}
+.page-link-active {
+    box-shadow: 0 0 0 3px rgb(0 242 234 / 25%);
+}
+@keyframes site-page-enter-fade {
+    from { opacity: .72; }
+    to { opacity: 1; }
+}
+@keyframes site-page-exit-fade {
+    from { opacity: 1; }
+    to { opacity: .45; }
+}
+@keyframes site-page-enter {
+    from { opacity: .72; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes site-page-exit {
+    from { opacity: 1; transform: none; }
+    to { opacity: .45; transform: translateY(-6px); }
+}
+html[data-motion="paused"]:is(.page-entering, .page-exiting) :is(main, footer) {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+@media (prefers-reduced-motion: reduce), print {
+    :is(.page-entering, .page-exiting) :is(main, footer) {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .page-link-active { box-shadow: none !important; }
+}

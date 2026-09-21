@@ -1,0 +1,12 @@
+Font Awesome Free 6.4.0 by Fonticons, Inc.
+Icons: CC BY 4.0; fonts: SIL OFL 1.1; code: MIT.
+https://fontawesome.com/license/free
+
+Inter by Rasmus Andersson: SIL Open Font License 1.1.
+https://github.com/rsms/inter/blob/master/LICENSE.txt
+
+JetBrains Mono: SIL Open Font License 1.1.
+https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt
+
+Tailwind CSS 3.4.17: MIT license.
+https://github.com/tailwindlabs/tailwindcss/blob/v3.4.17/LICENSE
